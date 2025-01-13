@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/p', function () {
+    return 'Privet!!!!!';
+});
+
+Route::get('/my_sity', function (){
+    return 'my sity is Penza';
+});
+
+Route::get('/my_u', 'MyPlaceController@index');
