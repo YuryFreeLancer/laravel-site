@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/posts', 'PostController@index');
+
+Route::get('/posts/create', 'PostController@create');
+
+Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/p', function () {
-    return 'Privet!!!!!';
-});
-
-Route::get('/my_sity', function (){
-    return 'my sity is Penza';
-});
-
-Route::get('/my_u', 'MyPlaceController@index');
+Route::get('/posts/update', 'PostController@update');
+Route::get('/posts/delete', 'PostController@delete');
