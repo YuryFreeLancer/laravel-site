@@ -88,5 +88,29 @@ class PostController extends Controller
             dd('finished');
     }
 
+    public function updateOrCreate()
+    {
+
+        $anotherPost = [
+            'title' => 'some post',
+            'content' => 'Умные часы WATCH GT 5, 41mm, черный',
+            'image' => 'some image',
+            'likes' => 5000,
+            'is_published' => 1,
+        ];
+
+        $post = Post::updateOrCreate([
+            'title' => 'some post_',   //Если нашел то обновил, если не нашел то создал
+        ],[
+            'title' => 'some post_',
+            'content' => 'some content update',
+            'image' => 'some image',
+            'likes' => 5000,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+        dd('finished');
+    }
+
 
 }
