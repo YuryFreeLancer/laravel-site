@@ -8,14 +8,10 @@ class PostController extends Controller
 {
 
     public function index(){
-        //return 'this is my page';
-        $posts = Post::where('title','Мужской набор')
-        ->orwhere('content','Мужской набор')
-        ->get();
-        foreach($posts as $po){
-            dump($po->title);
-        }
-        //dd($posts);
+
+        $posts = Post::all();
+
+        return view('posts', compact('posts'));
     }
 
     public function create(){
