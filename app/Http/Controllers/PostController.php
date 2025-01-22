@@ -6,7 +6,7 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    
+
     public function index(){
         //return 'this is my page';
         $posts = Post::where('title','Мужской набор')
@@ -63,5 +63,30 @@ class PostController extends Controller
         dd('deleted');
 
     }
-        
+
+    public function firstOrCreate()
+    {
+
+        $anotherPost = [
+            'title' => 'some post',
+            'content' => 'Умные часы WATCH GT 5, 41mm, черный',
+            'image' => 'some image',
+            'likes' => 5000,
+            'is_published' => 1,
+        ];
+
+            $post = Post::firstOrCreate([
+                'title' => 'some post_',
+            ],[
+                'title' => 'some post_',
+                'content' => 'some content',
+                'image' => 'some image',
+                'likes' => 5000,
+                'is_published' => 1,
+            ]);
+            dump($post->content);
+            dd('finished');
+    }
+
+
 }
