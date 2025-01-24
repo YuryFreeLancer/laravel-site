@@ -10,11 +10,11 @@
 <div class="container">
     <div class="row">
         <nav>
-            <ul>
-                <li><a href="{{ route('main.index') }}">Main</a></li>
-                <li><a href="{{ route('post.index') }}">Posts</a></li>
-                <li><a href="{{ route('contact.index') }}">Contacts</a></li>
-                <li><a href="{{ route('about.index') }}">About</a></li>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link text-bg-primary p-3" href="{{ route('main.index') }}">Main</a></li>
+                <li class="nav-item"><a class="nav-link text-bg-primary p-3" href="{{ route('post.index') }}">Posts</a></li>
+                <li class="nav-item"><a class="nav-link text-bg-primary p-3" href="{{ route('contact.index') }}">Contacts</a></li>
+                <li class="nav-item"><a class="nav-link text-bg-primary p-3" href="{{ route('about.index') }}">About</a></li>
             </ul>
         </nav>
     </div>
