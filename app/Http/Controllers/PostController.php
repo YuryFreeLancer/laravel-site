@@ -11,28 +11,18 @@ class PostController extends Controller
 
         $posts = Post::all();
 
-        return view('posts', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function create(){
-        $postArr = [
-            [
-                'title' => 'HUAWEI',
-                'content' => 'Умные часы WATCH GT 5, 41mm, черный'
-            ],
-            [
-                'title' => 'Xiaomi',
-                'content' => 'Умные часы Redmi Watch 5 Active, 51mm, черный'
-            ]
-            ];
 
-            foreach($postArr as $item){
-                Post::create([
-                    'title' => $item['title'],
-                    'content' => $item['content'],
-                ]);
-            }
-            dd('Yes');
+        return view('post.create');
+
+    }
+
+    public function store()
+    {
+dd('1111111111111');
     }
 
     public function update(){
