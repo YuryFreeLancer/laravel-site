@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
+    <div class="row  mb-3">
         <nav>
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link text-bg-primary p-3" href="{{ route('main.index') }}">Main</a></li>

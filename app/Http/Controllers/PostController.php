@@ -22,29 +22,43 @@ class PostController extends Controller
 
     public function store()
     {
-dd('1111111111111');
-    }
-
-    public function update(){
-
-        $post = Post::find(6);
-
-        $post->update([
-            'likes' => 465
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
         ]);
-        dd($post->likes);
-
+        Post::create($data);
+        return redirect()->route('post.index');
     }
 
-    // public function delete(){
-    //     $post = Post::find(1);
-    //     $post->delete();
-    //     dd('deleted');
+    public function show(Post $post)
+    {
+        return view('post.show', compact('post'));
+    }
 
-    // }
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
+
+
+    public function update(Post $post){
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
+    }
+
+     public function destroy(Post $post){
+         $post->delete();
+         return redirect()->route('post.index');
+     }
 
     public function delete(){
-        $post = Post::withTrashed()->find(1);
+        $post = Post::withTrashed()->find(14);
         $post->restore();
         dd('deleted');
 
