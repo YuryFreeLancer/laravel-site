@@ -10,10 +10,11 @@ class PostController extends Controller
 
     public function index(){
 
-        $posts = Post::all();
+        //$posts = Post::all();
         $category = Category::find(1);
-
-        dd($category->posts);
+        $post = Post::find(1);
+        //$posts = Post::where('category_id', $category->id)->get();
+        dd($post->category);
 
         //return view('post.index', compact('posts'));
     }
