@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 21 2025 г., 13:57
+-- Время создания: Янв 29 2025 г., 21:35
 -- Версия сервера: 5.7.39
 -- Версия PHP: 7.4.30
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- База данных: `laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'cats', NULL, NULL),
+(2, 'dogs', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -58,7 +79,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2025_01_11_110218_create_posts_table', 1);
+(5, '2025_01_10_185011_create_categories_table', 1),
+(6, '2025_01_11_110218_create_posts_table', 1),
+(7, '2025_01_29_123043_create_tags_table', 2),
+(8, '2025_01_29_123540_create_post_tags_table', 2);
 
 -- --------------------------------------------------------
 
@@ -105,16 +129,68 @@ CREATE TABLE `posts` (
   `is_published` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `category_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `content`, `image`, `likes`, `is_published`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'HUAWEI', 'Умные часы WATCH GT 5, 41mm, черный', NULL, NULL, 1, '2025-01-21 07:55:13', '2025-01-21 07:55:13', NULL),
-(2, 'Xiaomi', 'Умные часы Redmi Watch 5 Active, 51mm, черный', NULL, NULL, 1, '2025-01-21 07:55:13', '2025-01-21 07:55:13', NULL);
+INSERT INTO `posts` (`id`, `title`, `content`, `image`, `likes`, `is_published`, `created_at`, `updated_at`, `deleted_at`, `category_id`) VALUES
+(1, 'cats_title', 'cats_content', 'cats.jpg', NULL, 1, NULL, NULL, NULL, 1),
+(2, 'dogs_title', 'dogs_content', 'dogs.jpg', NULL, 1, NULL, NULL, NULL, 2),
+(3, 'cats1_title', 'cats1_content', 'cats1.jpg', NULL, 1, NULL, NULL, NULL, 1),
+(4, 'holiday_title', 'holiday', '1.jpg', NULL, 1, NULL, NULL, NULL, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `post_tags`
+--
+
+CREATE TABLE `post_tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `tag_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `post_tags`
+--
+
+INSERT INTO `post_tags` (`id`, `post_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 1, 3, NULL, NULL),
+(3, 2, 3, NULL, NULL),
+(4, 2, 1, NULL, NULL),
+(5, 3, 1, NULL, NULL),
+(6, 3, 1, NULL, NULL),
+(7, 3, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `tags`
+--
+
+INSERT INTO `tags` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'holidays', '2025-01-29 18:16:03', NULL),
+(2, 'travel', NULL, NULL),
+(3, 'pizza', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,6 +212,12 @@ CREATE TABLE `users` (
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `failed_jobs`
@@ -168,6 +250,21 @@ ALTER TABLE `personal_access_tokens`
 -- Индексы таблицы `posts`
 --
 ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_category_idx` (`category_id`);
+
+--
+-- Индексы таблицы `post_tags`
+--
+ALTER TABLE `post_tags`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_tag_post_idx` (`post_id`),
+  ADD KEY `post_tag_tag_idx` (`tag_id`);
+
+--
+-- Индексы таблицы `tags`
+--
+ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -182,6 +279,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -191,7 +294,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `personal_access_tokens`
@@ -203,13 +306,42 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `post_tags`
+--
+ALTER TABLE `post_tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT для таблицы `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `post_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `post_tags`
+--
+ALTER TABLE `post_tags`
+  ADD CONSTRAINT `post_tag_post_fk` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `post_tag_tag_fk` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
