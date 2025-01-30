@@ -9,21 +9,20 @@ use App\Models\Tag;
 class PostController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
 
-        $post = Post::find(1);
-        $category = Category::find(1);
-        $post = Tag::find(1);
-        $tag = Tag::find(1);
-        //$posts = Post::where('category_id', $category->id)->get();
-        dd($tag->posts);
+        $posts = Post::all();
 
-        //return view('post.index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
-    public function create(){
+    public function create()
+    {
 
-        return view('post.create');
+        $categories = Category::all();
+
+        return view('post.create', compact('categories'));
 
     }
 
@@ -33,6 +32,7 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
         ]);
         Post::create($data);
         return redirect()->route('post.index');
@@ -45,26 +45,31 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories'));
     }
 
 
-    public function update(Post $post){
+    public function update(Post $post)
+    {
         $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
         ]);
         $post->update($data);
         return redirect()->route('post.show', $post->id);
     }
 
-     public function destroy(Post $post){
-         $post->delete();
-         return redirect()->route('post.index');
-     }
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('post.index');
+    }
 
-    public function delete(){
+    public function delete()
+    {
         $post = Post::withTrashed()->find(14);
         $post->restore();
         dd('deleted');
@@ -82,17 +87,17 @@ class PostController extends Controller
             'is_published' => 1,
         ];
 
-            $post = Post::firstOrCreate([
-                'title' => 'some post_',
-            ],[
-                'title' => 'some post_',
-                'content' => 'some content',
-                'image' => 'some image',
-                'likes' => 5000,
-                'is_published' => 1,
-            ]);
-            dump($post->content);
-            dd('finished');
+        $post = Post::firstOrCreate([
+            'title' => 'some post_',
+        ], [
+            'title' => 'some post_',
+            'content' => 'some content',
+            'image' => 'some image',
+            'likes' => 5000,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+        dd('finished');
     }
 
     public function updateOrCreate()
@@ -108,7 +113,7 @@ class PostController extends Controller
 
         $post = Post::updateOrCreate([
             'title' => 'some post_',   //Если нашел то обновил, если не нашел то создал
-        ],[
+        ], [
             'title' => 'some post_',
             'content' => 'some content update',
             'image' => 'some image',
