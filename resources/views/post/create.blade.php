@@ -29,3 +29,4 @@
         <a href="{{ route('post.index') }}" class="btn btn-primary mb-3">Back</a>
     </div>
 @endsection
+
