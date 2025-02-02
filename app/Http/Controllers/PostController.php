@@ -31,11 +31,11 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'required|string',
             'category_id' => '',
-            'tags' => '',
+            'tags' => 'required|',
         ]);
         $tags = $data['tags'];
         unset($data['tags']);
@@ -70,9 +70,9 @@ class PostController extends Controller
     public function update(Post $post)
     {
         $data = request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => 'string',
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'required|string',
             'category_id' => '',
             'tags' => '',
         ]);
