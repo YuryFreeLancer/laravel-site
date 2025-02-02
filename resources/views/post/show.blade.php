@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <div>{{ $post->id }}.  {{ $post->title }}</div>
-        <div>{{ $post->content }}</div>
+        <div class="mb-2">{{ $post->content }}</div>
     </div>
     <div>
         <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary mb-3">Edit</a>
