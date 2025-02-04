@@ -6,7 +6,7 @@ use App\Models\Post;
 
 class Servise
 {
-    public function store()
+    public function store($data)
     {
         $tags = $data['tags'];
         unset($data['tags']);
