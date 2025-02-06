@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($posts as $post){
             $tagsIds = $tags->random(5)->pluck('id');
-            $posts->tags()->attach($tagsIds);
+            $post->tags()->attach($tagsIds);
         }
 
         // \App\Models\User::factory(10)->create();
