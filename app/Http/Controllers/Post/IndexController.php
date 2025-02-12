@@ -16,7 +16,7 @@ class IndexController extends BaseController
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
         $posts = Post::filter($filter)->paginate(10);
 
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts')); // Страница список постов
     }
 
 }

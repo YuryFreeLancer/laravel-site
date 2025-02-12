@@ -28,14 +28,14 @@ Route::get('/', function(){
 
 
 Route::group(['namespace' => 'Post'], function (){
-    Route::get('/posts', 'IndexController')->name('post.index');
-    Route::get('/posts/create', 'CreateController')->name('post.create');
+    Route::get('/posts', 'IndexController')->name('post.index'); // Страница список постов
+    Route::get('/posts/create', 'CreateController')->name('post.create'); // Страница создание поста
 
-    Route::post('/posts', 'StoreController')->name('post.store');
-    Route::get('/posts/{post}', 'ShowController')->name('post.show');
-    Route::get('/posts/{post}/edit', 'EditController')->name('post.edit');
-    Route::patch('/posts/{post}', 'UpdateController')->name('post.update');
-    Route::delete('/posts/{post}', 'DestroyController')->name('post.delete');
+    Route::post('/posts', 'StoreController')->name('post.store'); // Запрос создание поста
+    Route::get('/posts/{post}', 'ShowController')->name('post.show'); // Страница просмотр поста
+    Route::get('/posts/{post}/edit', 'EditController')->name('post.edit'); // Страница изменение поста
+    Route::patch('/posts/{post}', 'UpdateController')->name('post.update'); // Запрос изменение поста
+    Route::delete('/posts/{post}', 'DestroyController')->name('post.delete'); // Запрос удаление поста
 });
 
 

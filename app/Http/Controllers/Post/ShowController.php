@@ -9,7 +9,7 @@ class ShowController extends BaseController
 {
     public function __invoke(Post $post)
     {
-        return view('post.show', compact('post'));
+        return view('post.show', compact('post')); // Страница просмотр поста
     }
 
 }

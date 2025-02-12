@@ -12,7 +12,7 @@ class UpdateController extends BaseController
     {
         $data = $request->validated();
 
-        $this->servise->update($post, $data);
+        $this->servise->update($post, $data);  // Запрос изменение поста
 
         return redirect()->route('post.show', $post->id);
     }

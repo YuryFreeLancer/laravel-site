@@ -14,7 +14,7 @@ class StoreController extends BaseController
 
 
 
-        $this->servise->store($data);
+        $this->servise->store($data);  // Запрос создание поста
 
         return redirect()->route('post.index');
     }
