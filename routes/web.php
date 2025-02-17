@@ -43,10 +43,10 @@ Route::group(['namespace' => 'Category'], function (){
 //    Route::get('/categories/create', 'CreateController')->name('category.create'); // Страница создание поста
 
 //    Route::post('/categories', 'StoreController')->name('category.store'); // Запрос создание поста
-    Route::get('/categories/{post}', 'ShowController')->name('category.show'); // Страница просмотр поста
-//    Route::get('/categories/{post}/edit', 'EditController')->name('category.edit'); // Страница изменение поста
-//    Route::patch('/categories/{post}', 'UpdateController')->name('category.update'); // Запрос изменение поста
-//    Route::delete('/categories/{post}', 'DestroyController')->name('category.delete'); // Запрос удаление поста
+    Route::get('/categories/{category}', 'ShowController')->name('category.show'); // Страница просмотр поста
+//    Route::get('/categories/{category}/edit', 'EditController')->name('category.edit'); // Страница изменение поста
+//    Route::patch('/categories/{category}', 'UpdateController')->name('category.update'); // Запрос изменение поста
+//    Route::delete('/categories/{category}', 'DestroyController')->name('category.delete'); // Запрос удаление поста
 });
 
 

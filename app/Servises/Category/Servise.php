@@ -2,6 +2,9 @@
 
 namespace App\Servises\Category;
 
+
+use App\Models\Category;
+
 class Servise
 {
     public function store($data)
