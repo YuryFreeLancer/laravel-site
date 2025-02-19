@@ -13,7 +13,7 @@ class IndexController extends BaseController
         //$categories = Category::all();
         // Получаем все категории с их дочерними категориями
         $categories = Category::with('children')->whereNull('parent_id')->get();
-        dd($categories);
+        //dd($categories);
         // Передаем данные в представление
         return view('category.index', compact('categories'));
     }

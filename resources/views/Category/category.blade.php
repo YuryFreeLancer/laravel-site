@@ -3,7 +3,7 @@
     @if ($category->children->count())
         <ul>
             @foreach($category->children as $child)
-                @include('categories.category', ['category' => $child])
+                @include('category.category', ['category' => $child])
             @endforeach
         </ul>
     @endif

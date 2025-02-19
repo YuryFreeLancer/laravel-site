@@ -15,8 +15,8 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('parent_id');
+            $table->string('title'); // Название категории
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade'); // Внешний ключ для родительской категории
             $table->timestamps();
         });
     }
