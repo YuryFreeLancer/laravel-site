@@ -1,8 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <div>
-        <div>{{ $category->id }}.  {{ $category->title }}</div>
-        <div class="mb-2">{{ $category->parent_id }}</div>
+        <div>ID: {{ $category->id }}.<br> TITLE: {{ $category->title }}.<br> PARENT ID: {{ $category->parent_id }}.</div>
     </div>
 {{--    <div>--}}
 {{--        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary mb-3">Edit</a>--}}
