@@ -40,9 +40,9 @@ Route::group(['namespace' => 'Post'], function (){
 
 Route::group(['namespace' => 'Category'], function (){
     Route::get('/categories', 'IndexController')->name('category.index'); // Страница список постов
-//    Route::get('/categories/create', 'CreateController')->name('category.create'); // Страница создание поста
+    Route::get('/categories/create', 'CreateController')->name('category.create'); // Страница создание поста
 
-//    Route::post('/categories', 'StoreController')->name('category.store'); // Запрос создание поста
+    Route::post('/categories', 'StoreController')->name('category.store'); // Запрос создание поста
     Route::get('/categories/{category}', 'ShowController')->name('category.show'); // Страница просмотр поста
 //    Route::get('/categories/{category}/edit', 'EditController')->name('category.edit'); // Страница изменение поста
 //    Route::patch('/categories/{category}', 'UpdateController')->name('category.update'); // Запрос изменение поста

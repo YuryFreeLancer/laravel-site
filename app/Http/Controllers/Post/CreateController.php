@@ -14,7 +14,12 @@ class CreateController extends BaseController
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view('post.create', compact('categories', 'tags')); // Страница создание поста
+        //return view('post.create', compact('categories', 'tags')); // Страница создание поста
+        return view('post.create', ['tags' => $tags],[
+            'category' => [],
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'delimiter' => ' -> ',
+        ]); // Страница создание поста
     }
 
 }

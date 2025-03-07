@@ -27,12 +27,14 @@
             <div class="form-group mb-3">
                 <label for="category">Category</label>
                 <select class="form-control" id="category" name="category_id">
-                    @foreach($categories as $category)
-                        <option
-                            {{ 'category_id' === $category->id  ? ' selected' : ''}}
+                    <option value="0">-- без родительской категории</option>
+                    @include('category._categories')
+{{--                    @foreach($categories as $category)--}}
+{{--                        <option--}}
+{{--                            {{ 'category_id' === $category->id  ? ' selected' : ''}}--}}
 
-                            value="{{ $category->id }}">{{ $category->title }}</option>
-                    @endforeach
+{{--                            value="{{ $category->id }}">{{ $category->title }}</option>--}}
+{{--                    @endforeach--}}
 
                 </select>
             </div>
